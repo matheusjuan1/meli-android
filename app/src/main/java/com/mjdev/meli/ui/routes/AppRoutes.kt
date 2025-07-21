@@ -20,12 +20,12 @@ data object SplashRoute
 data object SearchRoute
 
 /**
- * ResultScreen
+ * ProductsScreen
  *
  * @param searchQuery Texto de consulta usado para buscar produtos.
  */
 @Serializable
-data class ResultRoute(val searchQuery: String)
+data class ProductsRoute(val searchQuery: String)
 
 /**
  * ProductDetailScreen

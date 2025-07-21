@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mjdev.meli.ui.theme.Gray400
 import com.mjdev.meli.ui.theme.Typography
 
 /**
@@ -33,7 +34,13 @@ fun MeliTextField(
             .fillMaxWidth(),
         shape = RoundedCornerShape(14.dp),
         value = value,
-        placeholder = { Text(placeHolder, style = Typography.labelMedium.copy(fontSize = 16.sp)) },
+        placeholder = {
+            Text(
+                placeHolder,
+                style = Typography.labelMedium.copy(fontSize = 16.sp),
+                color = Gray400
+            )
+        },
         enabled = enabled,
         textStyle = Typography.bodyLarge,
         singleLine = true,

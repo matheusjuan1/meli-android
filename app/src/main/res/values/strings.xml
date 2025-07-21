@@ -5,4 +5,6 @@
     <string name="logo_mj">Logo MJ dev</string>
     <string name="button_icon">Ícone do Botão</string>
     <string name="search">Buscar</string>
+    <string name="type_here">Digite aqui</string>
+    <string name="search_hint">Olá, o que você procura para hoje?</string>
 </resources>
