@@ -1,5 +1,6 @@
 package com.mjdev.meli.ui.routes
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -15,6 +16,7 @@ import com.mjdev.meli.ui.screens.splash.SplashScreen
  */
 @Composable
 fun AppNavigation(
+    paddingValues: PaddingValues,
     navController: NavHostController = rememberNavController(),
 ) {
     NavHost(
@@ -23,6 +25,7 @@ fun AppNavigation(
     ) {
         composable<SplashRoute> {
             SplashScreen(
+                paddingValues = paddingValues,
                 onNavigateToSearch = {
                     navController.navigate(SearchRoute) {
                         popUpTo(SplashRoute) { inclusive = true }

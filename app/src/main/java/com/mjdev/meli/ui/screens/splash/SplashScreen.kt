@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -26,19 +27,21 @@ import kotlinx.coroutines.delay
  * SplashScreen é a tela inicial do aplicativo, exibida por 3 segundos
  * antes de navegar para a tela de pesquisa.
  *
+ * @param paddingValues Valores de preenchimento para a tela, usado para evitar sobreposição com barras de status ou navegação.
  * @param onNavigateToSearch Callback de navegação para a tela de pesquisa.
  */
 @Composable
-fun SplashScreen(modifier: Modifier = Modifier, onNavigateToSearch: () -> Unit) {
+fun SplashScreen(paddingValues: PaddingValues, onNavigateToSearch: () -> Unit) {
     LaunchedEffect(key1 = Unit) {
         delay(3_000)
         onNavigateToSearch()
     }
 
     Box(
-        modifier = modifier
+        modifier = Modifier
             .background(Color.White)
             .fillMaxSize()
+            .padding(paddingValues)
     ) {
         Image(
             modifier = Modifier
@@ -72,5 +75,5 @@ fun SplashScreen(modifier: Modifier = Modifier, onNavigateToSearch: () -> Unit) 
 @Preview
 @Composable
 private fun SplashScreenPreview() {
-    SplashScreen(onNavigateToSearch = {})
+    SplashScreen(paddingValues = PaddingValues(), onNavigateToSearch = {})
 }

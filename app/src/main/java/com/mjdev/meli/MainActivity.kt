@@ -5,12 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.mjdev.meli.ui.routes.AppNavigation
-import com.mjdev.meli.ui.screens.splash.SplashScreen
 import com.mjdev.meli.ui.theme.MeliTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,8 +19,9 @@ class MainActivity : ComponentActivity() {
             MeliTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val navController = rememberNavController()
-                    val padding = innerPadding
+
                     AppNavigation(
+                        paddingValues = innerPadding,
                         navController = navController
                     )
                 }
