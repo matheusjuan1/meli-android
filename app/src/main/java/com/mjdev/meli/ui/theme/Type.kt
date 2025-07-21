@@ -6,29 +6,63 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-// Set of Material typography styles to start with
+val fontFamily = FontFamily.SansSerif
+
+private const val activatePreview = true
+
 val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
+    // "Title XI"
+    headlineLarge = TextStyle(
+        fontFamily = if (activatePreview) FontFamily.Default else fontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp
     ),
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
+    // "Title Lg"
+    headlineMedium = TextStyle(
+        fontFamily = if (activatePreview) FontFamily.Default else fontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp
+    ),
+    // "Title Md"
+    headlineSmall = TextStyle(
+        fontFamily = if (activatePreview) FontFamily.Default else fontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 16.sp
+    ),
+    // "Text Sm"
+    titleLarge = TextStyle(
+        fontFamily = if (activatePreview) FontFamily.Default else fontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 14.sp
+    ),
+    // "Text Md"
+    bodyLarge = TextStyle(
+        fontFamily = if (activatePreview) FontFamily.Default else fontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
+    ),
+    // "Text Sm"
+    bodyMedium = TextStyle(
+        fontFamily = if (activatePreview) FontFamily.Default else fontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp
+    ),
+    // "Text Xs"
+    bodySmall = TextStyle(
+        fontFamily = if (activatePreview) FontFamily.Default else fontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp
+    ),
+    // "Action"
+    labelLarge = TextStyle(
+        fontFamily = if (activatePreview) FontFamily.Default else fontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 16.sp
+    ),
+    // "Subtitle"
+    labelMedium = TextStyle(
+        fontFamily = if (activatePreview) FontFamily.Default else fontFamily,
         fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
+        fontSize = 14.sp
     )
-    */
 )
