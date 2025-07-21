@@ -49,7 +49,9 @@ fun MeliButton(
     onClick: () -> Unit
 ) {
     Button(
-        modifier = modifier.heightIn(min = 42.dp),
+        modifier = modifier
+            .heightIn(min = 42.dp)
+            .fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         enabled = enabled,
         contentPadding =
@@ -98,7 +100,6 @@ private fun MeliButtonPreview() {
 @Composable
 private fun MeliButtonNoIconPreview() {
     MeliButton(
-        modifier = Modifier.fillMaxWidth(),
         text = stringResource(R.string.search)
     ) { }
 }
@@ -107,7 +108,6 @@ private fun MeliButtonNoIconPreview() {
 @Composable
 private fun MeliButtonNoTextPreview() {
     MeliButton(
-        modifier = Modifier.fillMaxWidth(),
         iconRes = R.drawable.ic_search
     ) { }
 }
@@ -116,7 +116,6 @@ private fun MeliButtonNoTextPreview() {
 @Composable
 private fun MeliButtonDisabledPreview() {
     MeliButton(
-        modifier = Modifier.fillMaxWidth(),
         text = stringResource(R.string.search),
         enabled = false
     ) { }

@@ -5,14 +5,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,21 +26,14 @@ fun MeliTextField(
     enabled: Boolean = true,
     onValueChange: (String) -> Unit
 ) {
-
-    val focusRequester = remember { FocusRequester() }
-    var isFocused by remember { mutableStateOf(false) }
-
-
     OutlinedTextField(
         modifier = Modifier
-            .fillMaxWidth()
-            .focusRequester(focusRequester)
-            .onFocusChanged { isFocused = it.isFocused },
+            .fillMaxWidth(),
         shape = RoundedCornerShape(14.dp),
         value = value,
         placeholder = { Text(placeHolder, style = Typography.labelMedium.copy(fontSize = 16.sp)) },
         enabled = enabled,
-        textStyle = Typography.bodyMedium,
+        textStyle = Typography.bodyLarge,
         onValueChange = {
             onValueChange(it)
         }
