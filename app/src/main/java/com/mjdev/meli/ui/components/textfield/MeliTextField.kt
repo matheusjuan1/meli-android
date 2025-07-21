@@ -14,6 +14,7 @@ import com.mjdev.meli.ui.theme.Typography
 /**
  * MeliTextField é um componente de campo de texto reutilizável com suporte a foco e mudança de valor.
  *
+ * @param modifier Modificador para personalizar o layout do campo de texto.
  * @param value O valor atual do campo de texto.
  * @param placeHolder Texto de espaço reservado exibido quando o campo está vazio.
  * @param enabled Indica se o campo de texto está habilitado. Padrão é `true`.
@@ -21,19 +22,21 @@ import com.mjdev.meli.ui.theme.Typography
  */
 @Composable
 fun MeliTextField(
+    modifier: Modifier = Modifier,
     value: String,
     placeHolder: String = "",
     enabled: Boolean = true,
     onValueChange: (String) -> Unit
 ) {
     OutlinedTextField(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         shape = RoundedCornerShape(14.dp),
         value = value,
         placeholder = { Text(placeHolder, style = Typography.labelMedium.copy(fontSize = 16.sp)) },
         enabled = enabled,
         textStyle = Typography.bodyLarge,
+        singleLine = true,
         onValueChange = {
             onValueChange(it)
         }

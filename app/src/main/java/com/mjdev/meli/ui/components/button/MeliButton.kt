@@ -61,25 +61,25 @@ fun MeliButton(
             containerColor = color,
             disabledContainerColor = Gray300
         ),
-        elevation = ButtonDefaults.buttonElevation(defaultElevation = 8.dp),
+        elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp),
         onClick = onClick
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            iconRes?.let {
-                Icon(
-                    painter = painterResource(id = iconRes),
-                    tint = if (enabled) textColor else Gray400,
-                    contentDescription = stringResource(R.string.button_icon)
-                )
-            }
             text?.let {
                 Text(
                     text = text,
                     style = Typography.labelLarge,
                     color = if (enabled) textColor else Gray400
+                )
+            }
+            iconRes?.let {
+                Icon(
+                    painter = painterResource(id = iconRes),
+                    tint = if (enabled) textColor else Gray400,
+                    contentDescription = stringResource(R.string.button_icon)
                 )
             }
         }
