@@ -3,4 +3,6 @@
     <string name="logo_meli">Logo do Mercado Livre</string>
     <string name="developed_by">developed by</string>
     <string name="logo_mj">Logo MJ dev</string>
+    <string name="button_icon">Ícone do Botão</string>
+    <string name="search">Buscar</string>
 </resources>
