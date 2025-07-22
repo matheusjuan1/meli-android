@@ -17,8 +17,6 @@ object NetworkModule {
 
     private const val BASE_URL = "https://api.mercadolibre.com/"
 
-    private const val ACCESS_TOKEN = ""
-
     val json = Json {
         ignoreUnknownKeys = true
         coerceInputValues = true
@@ -30,7 +28,7 @@ object NetworkModule {
      */
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
-            .addInterceptor(AuthInterceptor(ACCESS_TOKEN))
+            .addInterceptor(AuthInterceptor())
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })

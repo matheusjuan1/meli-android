@@ -1,6 +1,7 @@
 package com.mjdev.meli.data.remote.interceptors
 
 import android.util.Log
+import com.mjdev.meli.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -10,9 +11,10 @@ import okhttp3.Response
  *
  * @param accessToken O token de acesso a ser adicionado ao cabeçalho.
  */
-class AuthInterceptor(private val accessToken: String) : Interceptor {
+class AuthInterceptor : Interceptor {
 
     private val TAG = "AuthInterceptor"
+    private val accessToken: String = BuildConfig.ACCESS_TOKEN
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
