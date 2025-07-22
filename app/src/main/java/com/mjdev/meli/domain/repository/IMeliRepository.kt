@@ -17,4 +17,13 @@ interface IMeliRepository {
      * @return Lista de produtos correspondentes à consulta.
      */
     suspend fun searchProducts(siteId: String, query: String): DataResult<List<Product>>
+
+    /**
+     * Obtém os detalhes de um produto específico.
+     *
+     * @param siteId ID do site onde os produto sera buscado (MLA para a Argentina, MLB para o Brasil, etc...).
+     * @param productId ID do produto a ser buscado.
+     * @return Detalhes do produto.
+     */
+    suspend fun getProductDetails(siteId: String, productId: String): DataResult<Product>
 }

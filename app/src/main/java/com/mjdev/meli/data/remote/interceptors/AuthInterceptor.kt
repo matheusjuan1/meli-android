@@ -9,7 +9,6 @@ import okhttp3.Response
  * AuthInterceptor é um interceptor de requisições HTTP que adiciona o token de acesso
  * ao cabeçalho de autorização.
  *
- * @param accessToken O token de acesso a ser adicionado ao cabeçalho.
  */
 class AuthInterceptor : Interceptor {
 

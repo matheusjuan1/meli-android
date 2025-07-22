@@ -2,6 +2,7 @@ package com.mjdev.meli.data.repository
 
 import com.mjdev.meli.data.remote.api.MeliApiService
 import com.mjdev.meli.data.remote.util.toDomainProduct
+import com.mjdev.meli.domain.exception.MeliException
 import com.mjdev.meli.domain.model.Product
 import com.mjdev.meli.domain.repository.IMeliRepository
 import com.mjdev.meli.domain.util.DataResult
@@ -17,13 +18,6 @@ import kotlinx.coroutines.withContext
  */
 class MeliRepository(private val apiService: MeliApiService) : IMeliRepository {
 
-    /**
-     * Busca produtos com base na consulta fornecida.
-     *
-     * @param siteId ID do site onde os produtos serão buscados (MLA para a Argentina, MLB para o Brasil, etc...).
-     * @param query Texto de consulta para buscar produtos.
-     * @return Lista de produtos correspondentes à consulta.
-     */
     override suspend fun searchProducts(siteId: String, query: String): DataResult<List<Product>> {
         return withContext(Dispatchers.IO) {
             safeApiCall {
@@ -31,5 +25,9 @@ class MeliRepository(private val apiService: MeliApiService) : IMeliRepository {
                 apiResponse.results?.map { it.toDomainProduct() } ?: emptyList()
             }
         }
+    }
+
+    override suspend fun getProductDetails(siteId: String, productId: String): DataResult<Product> {
+        return DataResult.Error(MeliException.UnknownException("Método não implementado"))
     }
 }
