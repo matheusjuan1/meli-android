@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.bundles.koin)
 
     // Dependências de teste
     testImplementation(libs.junit)
