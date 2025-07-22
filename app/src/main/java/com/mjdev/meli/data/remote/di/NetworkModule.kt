@@ -17,7 +17,7 @@ object NetworkModule {
 
     private const val BASE_URL = "https://api.mercadolibre.com/"
 
-    val json = Json {
+    private val json = Json {
         ignoreUnknownKeys = true
         coerceInputValues = true
         isLenient = true
@@ -41,7 +41,7 @@ object NetworkModule {
     /**
      * Instância do Retrofit configurada com o OkHttpClient e o conversor JSON.
      */
-    val retrofit: Retrofit by lazy {
+    private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
@@ -52,7 +52,7 @@ object NetworkModule {
     /**
      * Serviço da API do Mercado Livre.
      */
-    val mercadoLivreApiService: MeliApiService by lazy {
+    val meliApiService: MeliApiService by lazy {
         retrofit.create(MeliApiService::class.java)
     }
 }
