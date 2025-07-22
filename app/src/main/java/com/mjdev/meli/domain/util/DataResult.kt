@@ -1,11 +1,14 @@
 package com.mjdev.meli.domain.util
 
+import android.util.Log
 import com.mjdev.meli.data.remote.model.ApiErrorResponse
 import com.mjdev.meli.domain.exception.MeliException
 import com.mjdev.meli.domain.util.DataResult.Error
 import com.mjdev.meli.domain.util.DataResult.Success
 import kotlinx.serialization.json.Json
 import retrofit2.HttpException
+
+private const val TAG = "DataResult"
 
 private val jsonParser = Json {
     ignoreUnknownKeys = true
@@ -33,7 +36,9 @@ suspend fun <T> safeApiCall(
     apiCall: suspend () -> T
 ): DataResult<T> {
     return try {
-        Success(apiCall.invoke())
+        val result = apiCall.invoke()
+        Log.d(TAG, "Sucesso na chamada da API")
+        Success(result)
     } catch (e: HttpException) {
         val errorBody = e.response()?.errorBody()?.string()
 
@@ -43,12 +48,17 @@ suspend fun <T> safeApiCall(
             try {
                 jsonParser.decodeFromString<ApiErrorResponse>(it)
             } catch (parseException: Exception) {
-                parseException.printStackTrace()
+                Log.e(
+                    TAG,
+                    "Falha ao fazer o parse da ApiErrorResponse: ${parseException.localizedMessage}",
+                    parseException
+                )
                 null
             }
         }
 
         val errorMessage = apiError?.message ?: "Erro HTTP desconhecido."
+        val statusCode = e.code()
 
         val appException = when (e.code()) {
             401 -> MeliException.ApiException.Unauthorized(errorMessage, e)
@@ -57,8 +67,11 @@ suspend fun <T> safeApiCall(
             in 500..599 -> MeliException.ApiException.ServerError(errorMessage, e)
             else -> MeliException.ApiException.UnknownApiError(errorMessage, e, e.code())
         }
+
+        Log.e(TAG, "Falha na chamada API (HTTP ${statusCode}): ${errorMessage}. Erro completo: $errorBody", e)
         Error(appException)
     } catch (e: java.io.IOException) {
+        Log.e(TAG, "Falha na chamada API (Network): ${e.localizedMessage}", e)
         Error(
             MeliException.ApiException.NetworkError(
                 "Verifique sua conexão com a internet.",
@@ -66,6 +79,7 @@ suspend fun <T> safeApiCall(
             )
         )
     } catch (e: Exception) {
+        Log.e(TAG, "Falha na chamada API (Unknown): ${e.localizedMessage}", e)
         Error(
             MeliException.UnknownException(
                 "Ocorreu um erro inesperado: ${e.localizedMessage ?: "Erro desconhecido"}",
