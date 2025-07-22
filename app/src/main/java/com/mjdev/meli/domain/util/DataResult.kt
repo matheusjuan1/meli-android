@@ -1,0 +1,76 @@
+package com.mjdev.meli.domain.util
+
+import com.mjdev.meli.data.remote.model.ApiErrorResponse
+import com.mjdev.meli.domain.exception.MeliException
+import com.mjdev.meli.domain.util.DataResult.Error
+import com.mjdev.meli.domain.util.DataResult.Success
+import kotlinx.serialization.json.Json
+import retrofit2.HttpException
+
+private val jsonParser = Json {
+    ignoreUnknownKeys = true
+    coerceInputValues = true
+    isLenient = true
+}
+
+/**
+ * Classe para encapsular o resultado de uma fonte de dados.
+ * Pode ser um sucesso [Success] com um valor [T], ou um erro [Error] com uma [MeliException].
+ */
+sealed class DataResult<out T> {
+    data class Success<out T>(val value: T) : DataResult<T>()
+    data class Error(val error: MeliException) : DataResult<Nothing>()
+}
+
+/**
+ * Função para realizar chamadas de API de forma segura.
+ * Ela captura exceções e retorna um [DataResult] com o resultado da operação.
+ *
+ * @param apiCall A lambda que executa a chamada real da API.
+ * @return Um [DataResult] que pode ser um sucesso ou um erro.
+ */
+suspend fun <T> safeApiCall(
+    apiCall: suspend () -> T
+): DataResult<T> {
+    return try {
+        Success(apiCall.invoke())
+    } catch (e: HttpException) {
+        val errorBody = e.response()?.errorBody()?.string()
+
+
+        val apiError: ApiErrorResponse? = errorBody?.let {
+
+            try {
+                jsonParser.decodeFromString<ApiErrorResponse>(it)
+            } catch (parseException: Exception) {
+                parseException.printStackTrace()
+                null
+            }
+        }
+
+        val errorMessage = apiError?.message ?: "Erro HTTP desconhecido."
+
+        val appException = when (e.code()) {
+            401 -> MeliException.ApiException.Unauthorized(errorMessage, e)
+            403 -> MeliException.ApiException.Forbidden(errorMessage, e)
+            404 -> MeliException.ApiException.NotFound(errorMessage, e)
+            in 500..599 -> MeliException.ApiException.ServerError(errorMessage, e)
+            else -> MeliException.ApiException.UnknownApiError(errorMessage, e, e.code())
+        }
+        Error(appException)
+    } catch (e: java.io.IOException) {
+        Error(
+            MeliException.ApiException.NetworkError(
+                "Verifique sua conexão com a internet.",
+                e
+            )
+        )
+    } catch (e: Exception) {
+        Error(
+            MeliException.UnknownException(
+                "Ocorreu um erro inesperado: ${e.localizedMessage ?: "Erro desconhecido"}",
+                e
+            )
+        )
+    }
+}
