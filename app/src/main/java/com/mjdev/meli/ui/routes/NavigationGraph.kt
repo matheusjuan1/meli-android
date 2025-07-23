@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.mjdev.meli.ui.screens.products.ProductsScreen
 import com.mjdev.meli.ui.screens.search.SearchScreen
 import com.mjdev.meli.ui.screens.splash.SplashScreen
 
@@ -40,14 +41,21 @@ fun AppNavigation(
             SearchScreen(
                 paddingValues = paddingValues,
                 onSearch = { query ->
-//                    navController.navigate(ProductsScreen(searchQuery = query))
+                    navController.navigate(ProductsRoute(query))
                 }
             )
         }
 
         composable<ProductsRoute> { backStackEntry ->
             val searchQuery = backStackEntry.arguments?.getString("searchQuery") ?: ""
-            // TODO
+            ProductsScreen(
+                query = searchQuery,
+                paddingValues = paddingValues,
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onProductClick = { }
+            )
         }
 
         composable<ProductDetailRoute> { backStackEntry ->

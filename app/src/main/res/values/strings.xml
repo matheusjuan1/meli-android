@@ -7,4 +7,5 @@
     <string name="search">Buscar</string>
     <string name="type_here">Digite aqui</string>
     <string name="search_hint">Olá, o que você procura para hoje?</string>
+    <string name="result_for">Resultado de "%s"</string>
 </resources>
