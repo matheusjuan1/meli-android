@@ -17,10 +17,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        val meliAccessToken: String = project.findProperty("meli.accessToken") as? String ?: ""
-        buildConfigField("String", "ACCESS_TOKEN", "\"$meliAccessToken\"")
-        buildConfigField("Boolean", "USE_MOCKS", "true")
     }
 
     buildTypes {

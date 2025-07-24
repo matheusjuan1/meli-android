@@ -1,7 +1,7 @@
 package com.mjdev.meli.data.remote.interceptors
 
 import android.util.Log
-import com.mjdev.meli.BuildConfig
+import com.mjdev.meli.AppConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -13,7 +13,7 @@ import okhttp3.Response
 class AuthInterceptor : Interceptor {
 
     private val TAG = "AuthInterceptor"
-    private val accessToken: String = BuildConfig.ACCESS_TOKEN
+    private val accessToken: String = AppConfig.MELI_ACCESS_TOKEN
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()

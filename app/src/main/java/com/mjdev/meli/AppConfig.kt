@@ -5,6 +5,7 @@ package com.mjdev.meli
  */
 object AppConfig {
 
-    val useMocks: Boolean = BuildConfig.USE_MOCKS
+    const val USE_MOCKS: Boolean = false
+    const val MELI_ACCESS_TOKEN: String = ""
     const val SITE_ID: String = "MLA"
 }
