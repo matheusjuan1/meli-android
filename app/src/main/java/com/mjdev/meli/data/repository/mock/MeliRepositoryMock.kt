@@ -28,7 +28,7 @@ class MeliRepositoryMock(private val context: Context) : IMeliRepository {
     }
 
     override suspend fun searchProducts(siteId: String, query: String): DataResult<List<Product>> {
-        val folderName = query.lowercase()
+        val folderName = query.lowercase().trim()
         val fileName = "search-${siteId.uppercase()}-${folderName}.json"
 
         return try {
