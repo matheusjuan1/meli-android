@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mjdev.meli.R
 import com.mjdev.meli.ui.components.button.MeliButton
+import com.mjdev.meli.ui.components.topbar.MeliTopBar
 import com.mjdev.meli.ui.screens.products.components.ProductCard
 import com.mjdev.meli.ui.theme.Gray200
 import com.mjdev.meli.ui.theme.Gray400
@@ -59,7 +60,16 @@ fun ProductsScreen(
         }
     }
 
-    Scaffold { paddingValues ->
+    Scaffold(
+        topBar = {
+            MeliTopBar(
+                title = stringResource(R.string.search),
+                onBack = {
+                    onBackClick()
+                }
+            )
+        }
+    ) { paddingValues ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -128,10 +138,7 @@ fun ProductsScreen(
                     ) {
                         item {
                             Column(
-                                modifier = Modifier.padding(
-                                    horizontal = 16.dp,
-                                    vertical = 8.dp
-                                )
+                                modifier = Modifier.padding(16.dp)
                             ) {
                                 Text(
                                     text = stringResource(R.string.result_for, query),
