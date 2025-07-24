@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  testar:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,6 +32,4 @@ jobs:
         run: chmod +x gradlew
 
       - name: ✅ Rodar Testes Unitários
-        env:
-          JAVA_HOME: ${{ steps.set_java_11.outputs.java-home }}
         run: ./gradlew testDebugUnitTest
