@@ -71,12 +71,7 @@ suspend fun <T> safeApiCall(
         Error(appException)
     } catch (e: java.io.IOException) {
         Log.e(TAG, "Falha na chamada API (Network): ${e.localizedMessage}", e)
-        Error(
-            MeliException.ApiException.NetworkError(
-                "Verifique sua conexão com a internet.",
-                e
-            )
-        )
+        Error(MeliException.ApiException.NetworkError(e.message ?: "Erro de conexão desconhecido."))
     } catch (e: Exception) {
         Log.e(TAG, "Falha na chamada API (Unknown): ${e.localizedMessage}", e)
         Error(
