@@ -22,11 +22,6 @@ sealed class MeliException(message: String? = null, cause: Throwable? = null) : 
     }
 
     /**
-     * Exceções relacionadas a problemas de mapeamento ou processamento de dados.
-     */
-    class DataMappingException(message: String? = "Erro ao processar dados recebidos.", cause: Throwable? = null) : MeliException(message, cause)
-
-    /**
      * Exceção para erros inesperados não categorizados.
      */
     class UnknownException(message: String? = "Ocorreu um erro inesperado.", cause: Throwable? = null) : MeliException(message, cause)

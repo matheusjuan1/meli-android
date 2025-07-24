@@ -1,5 +1,6 @@
 package com.mjdev.meli.ui.screens.products.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -44,12 +45,14 @@ import java.util.Currency
 @Composable
 fun ProductCard(
     product: Product,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (productId: String) -> Unit
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp),
+            .padding(vertical = 4.dp)
+            .clickable { onClick(product.id) },
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(
             containerColor = Gray100
@@ -138,6 +141,7 @@ private fun ProductCardPreview() {
             currencyId = "BRL",
             imageUrl = "http://http2.mlstatic.com/D_619667-MLA47781882790_102021-I.jpg"
         ),
+        onClick = {},
         modifier = Modifier.padding(16.dp)
     )
 }

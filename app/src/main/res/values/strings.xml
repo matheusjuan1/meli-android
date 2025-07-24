@@ -9,4 +9,11 @@
     <string name="search_hint">Olá, o que você procura para hoje?</string>
     <string name="result_for">Resultado de \"%s\"</string>
     <string name="sold_by">Vendido por %s</string>
+    <string name="n_products">%d produtos</string>
+    <string name="one_products">1 produto</string>
+    <string name="no_results">Nenhum resultado encontrado para \"%s\"</string>
+    <string name="new_search">Fazer nova busca</string>
+    <string name="error_generic">Ocorreu um erro inesperado. Tente novamente mais tarde.</string>
+    <string name="back">Voltar</string>
+    <string name="error_image">Imagem de erro</string>
 </resources>
