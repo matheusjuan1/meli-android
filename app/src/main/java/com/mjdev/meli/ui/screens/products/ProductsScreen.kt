@@ -27,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.mjdev.meli.AppConfig
 import com.mjdev.meli.R
 import com.mjdev.meli.ui.components.button.MeliButton
 import com.mjdev.meli.ui.components.topbar.MeliTopBar
@@ -56,7 +57,7 @@ fun ProductsScreen(
 
     LaunchedEffect(query) {
         if (query.isNotBlank()) {
-            viewModel.searchProducts("MLA", query)
+            viewModel.searchProducts(AppConfig.SITE_ID, query)
         }
     }
 

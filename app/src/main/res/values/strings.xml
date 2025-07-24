@@ -16,4 +16,9 @@
     <string name="error_generic">Ocorreu um erro inesperado. Tente novamente mais tarde.</string>
     <string name="back">Voltar</string>
     <string name="error_image">Imagem de erro</string>
+    <string name="product_details">Detalhes do Produto</string>
+    <string name="n_availables">%d disponíveis</string>
+    <string name="out_of_stock">Nenhum produto no estoque</string>
+    <string name="condition_x">Condição: %s</string>
+    <string name="go_to_meli">Ver no Mercado Livre</string>
 </resources>
