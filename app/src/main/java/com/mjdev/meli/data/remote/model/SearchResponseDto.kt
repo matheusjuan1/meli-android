@@ -4,15 +4,15 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SearchResponse(
+data class SearchResponseDto(
     @SerialName("site_id") val siteId: String? = null,
     @SerialName("query") val query: String? = null,
-    @SerialName("paging") val paging: Paging? = null,
-    @SerialName("results") val results: List<ProductResult>? = null,
+    @SerialName("paging") val paging: PagingDto? = null,
+    @SerialName("results") val results: List<ProductDto>? = null,
 )
 
 @Serializable
-data class Paging(
+data class PagingDto(
     @SerialName("total") val total: Int? = null,
     @SerialName("primary_results") val primaryResults: Int? = null,
     @SerialName("offset") val offset: Int? = null,
@@ -21,7 +21,7 @@ data class Paging(
 
 
 @Serializable
-data class ProductResult(
+data class ProductDto(
     @SerialName("id") val id: String? = null,
     @SerialName("title") val title: String? = null,
     @SerialName("price") val price: Double? = null,
@@ -30,18 +30,18 @@ data class ProductResult(
     @SerialName("currency_id") val currencyId: String? = null,
     @SerialName("official_store_name") val officialStoreName: String? = null,
     @SerialName("thumbnail") val thumbnail: String? = null,
-    @SerialName("shipping") val shipping: Shipping? = null,
-    @SerialName("attributes") val attributes: List<Attribute>? = null
+    @SerialName("shipping") val shipping: ShippingDto? = null,
+    @SerialName("attributes") val attributes: List<AttributeDto>? = null
 )
 
 @Serializable
-data class Shipping(
+data class ShippingDto(
     @SerialName("mode") val mode: String? = null,
     @SerialName("tags") val tags: List<@Serializable String>? = null
 )
 
 @Serializable
-data class Attribute(
+data class AttributeDto(
     @SerialName("id") val id: String? = null,
     @SerialName("name") val name: String? = null,
     @SerialName("value_name") val valueName: String? = null

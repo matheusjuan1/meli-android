@@ -5,7 +5,7 @@ import java.math.BigDecimal
 /**
  * ProductDetails representa os detalhes de um produto do Mercado Livre.
  *
- * @property id ID único do produto.
+ * @property id ID do produto.
  * @property title Título do produto.
  * @property price Preço atual do produto.
  * @property originalPrice Preço original do produto, se houver desconto.

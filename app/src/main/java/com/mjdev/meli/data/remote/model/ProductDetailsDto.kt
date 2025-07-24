@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ProductDetailsResponse(
+data class ProductDetailsDto(
     val id: String,
     @SerialName("site_id") val siteId: String,
     val title: String,
@@ -22,12 +22,12 @@ data class ProductDetailsResponse(
     val permalink: String,
     @SerialName("thumbnail_id") val thumbnailId: String,
     val thumbnail: String,
-    val pictures: List<ProductPicture>,
+    val pictures: List<ProductPictureDto>,
     val warranty: String? = null,
 )
 
 @Serializable
-data class ProductPicture(
+data class ProductPictureDto(
     val id: String,
     val url: String,
     @SerialName("secure_url") val secureUrl: String,

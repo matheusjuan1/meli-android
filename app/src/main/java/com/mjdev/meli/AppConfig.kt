@@ -1,7 +1,7 @@
 package com.mjdev.meli
 
 /**
- * AppConfig é um objeto de configuração da aplicação.
+ * AppConfig é um objeto que contém as configurações da aplicação.
  */
 object AppConfig {
 

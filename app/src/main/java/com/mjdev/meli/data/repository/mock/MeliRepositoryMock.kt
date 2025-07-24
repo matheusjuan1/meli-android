@@ -2,8 +2,8 @@ package com.mjdev.meli.data.repository.mock
 
 import android.content.Context
 import android.util.Log
-import com.mjdev.meli.data.remote.model.ProductDetailsResponse
-import com.mjdev.meli.data.remote.model.SearchResponse
+import com.mjdev.meli.data.remote.model.ProductDetailsDto
+import com.mjdev.meli.data.remote.model.SearchResponseDto
 import com.mjdev.meli.data.remote.util.AppJson
 import com.mjdev.meli.data.remote.util.toDomainProduct
 import com.mjdev.meli.data.remote.util.toDomainProductDetails
@@ -33,7 +33,7 @@ class MeliRepositoryMock(private val context: Context) : IMeliRepository {
                 Log.w(TAG, "Arquivo mock não encontrado para: $fileName. Retornando lista vazia.")
                 DataResult.Success(emptyList())
             } else {
-                val searchResponse = AppJson.decodeFromString<SearchResponse>(jsonString)
+                val searchResponse = AppJson.decodeFromString<SearchResponseDto>(jsonString)
                 val products = searchResponse.results?.map { it.toDomainProduct() } ?: emptyList()
                 Log.d(
                     TAG,
@@ -69,7 +69,7 @@ class MeliRepositoryMock(private val context: Context) : IMeliRepository {
                 DataResult.Error(MeliException.UnknownException("Detalhes do produto não encontrados."))
             } else {
                 val apiProductDetails =
-                    AppJson.decodeFromString<ProductDetailsResponse>(jsonString)
+                    AppJson.decodeFromString<ProductDetailsDto>(jsonString)
                 val productDetails = apiProductDetails.toDomainProductDetails()
                 Log.d(TAG, "Mock de detalhes para '$productId' carregado com sucesso.")
                 DataResult.Success(productDetails)

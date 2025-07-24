@@ -12,6 +12,9 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+/**
+ * Koin module para injetar as dependências da aplicação.
+ */
 val appModules = module {
 
     // Api Service

@@ -20,7 +20,7 @@ fun BigDecimal.currencyFormat(
         val numberFormat = NumberFormat.getCurrencyInstance(locale)
         numberFormat.currency = currency
         numberFormat.format(this)
-    } catch (e: Exception) {
+    } catch (_: Exception) {
         this.toString()
     }
 }

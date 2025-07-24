@@ -1,15 +1,15 @@
 package com.mjdev.meli.data.remote.util
 
-import com.mjdev.meli.data.remote.model.ProductDetailsResponse
-import com.mjdev.meli.data.remote.model.ProductResult
+import com.mjdev.meli.data.remote.model.ProductDetailsDto
+import com.mjdev.meli.data.remote.model.ProductDto
 import com.mjdev.meli.domain.model.Product
 import com.mjdev.meli.domain.model.ProductDetails
 import java.math.BigDecimal
 
 /**
- * Função para converter um objeto [ProductResult] em um objeto [Product].
+ * Função para converter um objeto [ProductDto] em um objeto [Product].
  */
-fun ProductResult.toDomainProduct(): Product {
+fun ProductDto.toDomainProduct(): Product {
     return Product(
         id = this.id ?: "",
         title = this.title ?: "",
@@ -23,9 +23,9 @@ fun ProductResult.toDomainProduct(): Product {
 }
 
 /**
- * Função para converter um objeto [ProductDetailsResponse] em um objeto [ProductDetails].
+ * Função para converter um objeto [ProductDetailsDto] em um objeto [ProductDetails].
  */
-fun ProductDetailsResponse.toDomainProductDetails(): ProductDetails {
+fun ProductDetailsDto.toDomainProductDetails(): ProductDetails {
     return ProductDetails(
         id = this.id,
         title = this.title,

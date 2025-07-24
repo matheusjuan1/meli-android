@@ -7,12 +7,12 @@ import kotlinx.serialization.Serializable
  *
  * @property code Código de erro fornecido pela API, se disponível.
  * @property message Mensagem de erro fornecida pela API.
- * @property error Código de erro fornecido pela API.
+ * @property error Descrição do erro, se disponível.
  * @property status Código de status HTTP da resposta.
  * @property cause Lista de causas do erro, se disponíveis.
  */
 @Serializable
-data class ApiErrorResponse(
+data class ErrorResponseDto(
     val code: String?,
     val message: String?,
     val error: String?,

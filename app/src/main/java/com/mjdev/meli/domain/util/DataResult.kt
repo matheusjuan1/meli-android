@@ -1,7 +1,7 @@
 package com.mjdev.meli.domain.util
 
 import android.util.Log
-import com.mjdev.meli.data.remote.model.ApiErrorResponse
+import com.mjdev.meli.data.remote.model.ErrorResponseDto
 import com.mjdev.meli.data.remote.util.AppJson
 import com.mjdev.meli.domain.exception.MeliException
 import com.mjdev.meli.domain.util.DataResult.Error
@@ -38,10 +38,10 @@ suspend fun <T> safeApiCall(
         val errorBody = e.response()?.errorBody()?.string()
 
 
-        val apiError: ApiErrorResponse? = errorBody?.let {
+        val apiError: ErrorResponseDto? = errorBody?.let {
 
             try {
-                AppJson.decodeFromString<ApiErrorResponse>(it)
+                AppJson.decodeFromString<ErrorResponseDto>(it)
             } catch (parseException: Exception) {
                 Log.e(
                     TAG,

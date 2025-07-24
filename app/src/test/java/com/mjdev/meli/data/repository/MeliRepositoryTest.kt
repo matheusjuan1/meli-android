@@ -1,8 +1,8 @@
 package com.mjdev.meli.data.repository
 
 import com.mjdev.meli.base.BaseRepositoryTest
-import com.mjdev.meli.data.remote.model.ProductResult
-import com.mjdev.meli.data.remote.model.SearchResponse
+import com.mjdev.meli.data.remote.model.ProductDto
+import com.mjdev.meli.data.remote.model.SearchResponseDto
 import com.mjdev.meli.domain.exception.MeliException
 import com.mjdev.meli.domain.util.DataResult
 import io.mockk.coEvery
@@ -29,7 +29,7 @@ class MeliRepositoryTest : BaseRepositoryTest() {
     @Test
     fun `searchProducts should return Success with mapped products on API success`() = runTest {
         val apiProducts = listOf(
-            ProductResult(
+            ProductDto(
                 id = "1",
                 title = "Product A API",
                 thumbnail = "thumbA",
@@ -42,7 +42,7 @@ class MeliRepositoryTest : BaseRepositoryTest() {
                 attributes = emptyList(),
             )
         )
-        val searchResponse = SearchResponse(
+        val searchResponse = SearchResponseDto(
             siteId = "MLA",
             query = "test",
             results = apiProducts,
@@ -62,7 +62,7 @@ class MeliRepositoryTest : BaseRepositoryTest() {
     @Test
     fun `searchProducts should return Success with empty list if API returns null results`() =
         runTest {
-            val searchResponse = SearchResponse(
+            val searchResponse = SearchResponseDto(
                 siteId = "MLA",
                 query = "test",
                 results = null,

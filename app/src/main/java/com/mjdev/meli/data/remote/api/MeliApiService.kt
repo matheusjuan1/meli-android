@@ -1,6 +1,6 @@
 package com.mjdev.meli.data.remote.api
 
-import com.mjdev.meli.data.remote.model.SearchResponse
+import com.mjdev.meli.data.remote.model.SearchResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -15,11 +15,11 @@ interface MeliApiService {
      *
      * @param siteId ID do site onde os produtos serão buscados (MLA para a Argentina, MLB para o Brasil, etc...).
      * @param query Texto de consulta para buscar produtos.
-     * @return SearchResponse contendo os resultados da busca.
+     * @return [SearchResponseDto] contendo os resultados da busca.
      */
     @GET("sites/{site_id}/search")
     suspend fun searchProducts(
         @Path("site_id") siteId: String,
         @Query("query") query: String
-    ): SearchResponse
+    ): SearchResponseDto
 }

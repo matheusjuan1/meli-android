@@ -26,7 +26,7 @@ class ProductDetailsViewModel(
      * Busca os detalhes de um produto dado seu ID.
      *
      * @param siteId O ID do site (MLA para a Argentina, MLB para o Brasil, etc...).
-     * @param productId O ID único do produto a ser buscado.
+     * @param productId O ID do produto a ser buscado.
      */
     fun getProductDetails(siteId: String, productId: String) {
         if (_uiState.value.isLoading) return
