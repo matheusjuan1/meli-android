@@ -16,6 +16,10 @@ kotlinx-coroutines = "1.8.1"
 kotlinx-serialization = "1.7.3"
 serializationConverter = "1.0.0"
 koin = "3.5.0"
+mockk = "1.13.10"
+kotlinx-coroutines-test = "1.8.1"
+androidx-arch-core-testing = "2.2.0"
+koin-test = "3.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -44,6 +48,11 @@ kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 koin-androidx-navigation = { group = "io.insert-koin", name = "koin-androidx-navigation", version.ref = "koin" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+androidx-arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidx-arch-core-testing" }
+koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "koin-test" }
+koin-test-junit4 = { group = "io.insert-koin", name = "koin-test-junit4", version.ref = "koin-test" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
