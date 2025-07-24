@@ -19,8 +19,8 @@ class ProductsViewModel(
     private val repository: IMeliRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(ProductsScreenState())
-    val uiState: StateFlow<ProductsScreenState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(ProductsUiState())
+    val uiState: StateFlow<ProductsUiState> = _uiState.asStateFlow()
 
     /**
      * Busca produtos com base na consulta fornecida.
