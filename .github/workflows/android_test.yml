@@ -9,25 +9,37 @@ on:
       - main
 
 jobs:
-  test:
+  testar:
     runs-on: ubuntu-latest
 
     steps:
       - name: ⬇️ Checar Código
         uses: actions/checkout@v4
 
-      - name: ☕ Configurar JDK 11
+      - name: ☕ Configurar JDK 17 para Ferramentas Android
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: 🤖 Configurar SDK Android e Ferramentas
+        uses: android-actions/setup-android@v3
+        env:
+          SKIP_JDK_VERSION_CHECK: true
+
+      - name: 🔒 Conceder Permissão ao gradlew
+        run: chmod +x gradlew
+
+      - name: ☕ Configurar JDK 11 para Projeto Android
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'temurin'
           cache: 'gradle'
-
-      - name: 🤖 Configurar SDK Android
-        uses: android-actions/setup-android@v3
-
-      - name: 🔒 Conceder Permissão ao gradlew
-        run: chmod +x gradlew
+        id: set_java_11
 
       - name: ✅ Rodar Testes Unitários
+        env:
+          JAVA_HOME: ${{ steps.set_java_11.outputs.java-home }}
         run: ./gradlew testDebugUnitTest
