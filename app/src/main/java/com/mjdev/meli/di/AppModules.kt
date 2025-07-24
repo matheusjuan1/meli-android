@@ -19,7 +19,7 @@ val appModules = module {
 
     // Repository
     single<IMeliRepository> {
-        if (AppConfig.useMocks) {
+        if (AppConfig.USE_MOCKS) {
             MeliRepositoryMock(androidContext())
         } else {
             MeliRepository(get())
