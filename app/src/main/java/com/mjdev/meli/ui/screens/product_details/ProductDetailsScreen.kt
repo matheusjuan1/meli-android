@@ -94,7 +94,7 @@ fun ProductDetailsScreen(
 
                         Image(
                             modifier = Modifier
-                                .width(150.dp)
+                                .width(120.dp)
                                 .align(Alignment.CenterHorizontally),
                             painter = painterResource(R.drawable.img_error),
                             contentDescription = stringResource(R.string.error_image)
