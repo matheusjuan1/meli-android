@@ -44,7 +44,7 @@ class ProductDetailsViewModel(
                 is DataResult.Success -> {
                     _uiState.update {
                         it.copy(
-                            productDetails = result.value,
+                            productDetails = result.data,
                             isLoading = false,
                             error = null
                         )

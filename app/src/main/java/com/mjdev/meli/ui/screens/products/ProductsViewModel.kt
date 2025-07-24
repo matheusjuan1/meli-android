@@ -38,7 +38,7 @@ class ProductsViewModel(
                     _uiState.update {
                         it.copy(
                             isLoading = false,
-                            products = result.value,
+                            products = result.data,
                             error = null
                         )
                     }

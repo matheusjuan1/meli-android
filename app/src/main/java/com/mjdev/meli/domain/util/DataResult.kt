@@ -16,7 +16,7 @@ private const val TAG = "DataResult"
  * Pode ser um sucesso [Success] com um valor [T], ou um erro [Error] com uma [MeliException].
  */
 sealed class DataResult<out T> {
-    data class Success<out T>(val value: T) : DataResult<T>()
+    data class Success<out T>(val data: T) : DataResult<T>()
     data class Error(val error: MeliException) : DataResult<Nothing>()
 }
 
