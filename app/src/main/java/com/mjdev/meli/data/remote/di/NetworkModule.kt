@@ -3,7 +3,7 @@ package com.mjdev.meli.data.remote.di
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.mjdev.meli.data.remote.api.MeliApiService
 import com.mjdev.meli.data.remote.interceptors.AuthInterceptor
-import kotlinx.serialization.json.Json
+import com.mjdev.meli.data.remote.util.AppJson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,12 +16,6 @@ import java.util.concurrent.TimeUnit
 object NetworkModule {
 
     private const val BASE_URL = "https://api.mercadolibre.com/"
-
-    private val json = Json {
-        ignoreUnknownKeys = true
-        coerceInputValues = true
-        isLenient = true
-    }
 
     /**
      * Instância do OkHttpClient configurada com interceptors e timeouts.
@@ -45,7 +39,7 @@ object NetworkModule {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+            .addConverterFactory(AppJson.asConverterFactory("application/json".toMediaType()))
             .build()
     }
 

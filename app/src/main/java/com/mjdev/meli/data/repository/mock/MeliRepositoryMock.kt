@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.mjdev.meli.data.remote.model.ProductDetailsResponse
 import com.mjdev.meli.data.remote.model.SearchResponse
+import com.mjdev.meli.data.remote.util.AppJson
 import com.mjdev.meli.data.remote.util.toDomainProduct
 import com.mjdev.meli.data.remote.util.toDomainProductDetails
 import com.mjdev.meli.domain.exception.MeliException
@@ -11,7 +12,6 @@ import com.mjdev.meli.domain.model.Product
 import com.mjdev.meli.domain.model.ProductDetails
 import com.mjdev.meli.domain.repository.IMeliRepository
 import com.mjdev.meli.domain.util.DataResult
-import kotlinx.serialization.json.Json
 import java.io.IOException
 
 /**
@@ -24,12 +24,6 @@ class MeliRepositoryMock(private val context: Context) : IMeliRepository {
 
     private val TAG = "MeliRepositoryMock"
 
-    private val jsonParser = Json {
-        ignoreUnknownKeys = true
-        coerceInputValues = true
-        isLenient = true
-    }
-
     override suspend fun searchProducts(siteId: String, query: String): DataResult<List<Product>> {
         val fileName = "search-${siteId.uppercase()}-${query.lowercase().trim()}.json"
 
@@ -39,7 +33,7 @@ class MeliRepositoryMock(private val context: Context) : IMeliRepository {
                 Log.w(TAG, "Arquivo mock não encontrado para: $fileName. Retornando lista vazia.")
                 DataResult.Success(emptyList())
             } else {
-                val searchResponse = jsonParser.decodeFromString<SearchResponse>(jsonString)
+                val searchResponse = AppJson.decodeFromString<SearchResponse>(jsonString)
                 val products = searchResponse.results?.map { it.toDomainProduct() } ?: emptyList()
                 Log.d(
                     TAG,
@@ -75,7 +69,7 @@ class MeliRepositoryMock(private val context: Context) : IMeliRepository {
                 DataResult.Error(MeliException.UnknownException("Detalhes do produto não encontrados."))
             } else {
                 val apiProductDetails =
-                    jsonParser.decodeFromString<ProductDetailsResponse>(jsonString)
+                    AppJson.decodeFromString<ProductDetailsResponse>(jsonString)
                 val productDetails = apiProductDetails.toDomainProductDetails()
                 Log.d(TAG, "Mock de detalhes para '$productId' carregado com sucesso.")
                 DataResult.Success(productDetails)

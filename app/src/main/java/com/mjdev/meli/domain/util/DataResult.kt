@@ -2,19 +2,14 @@ package com.mjdev.meli.domain.util
 
 import android.util.Log
 import com.mjdev.meli.data.remote.model.ApiErrorResponse
+import com.mjdev.meli.data.remote.util.AppJson
 import com.mjdev.meli.domain.exception.MeliException
 import com.mjdev.meli.domain.util.DataResult.Error
 import com.mjdev.meli.domain.util.DataResult.Success
-import kotlinx.serialization.json.Json
 import retrofit2.HttpException
 
 private const val TAG = "DataResult"
 
-private val jsonParser = Json {
-    ignoreUnknownKeys = true
-    coerceInputValues = true
-    isLenient = true
-}
 
 /**
  * Classe para encapsular o resultado de uma fonte de dados.
@@ -46,7 +41,7 @@ suspend fun <T> safeApiCall(
         val apiError: ApiErrorResponse? = errorBody?.let {
 
             try {
-                jsonParser.decodeFromString<ApiErrorResponse>(it)
+                AppJson.decodeFromString<ApiErrorResponse>(it)
             } catch (parseException: Exception) {
                 Log.e(
                     TAG,
@@ -68,7 +63,11 @@ suspend fun <T> safeApiCall(
             else -> MeliException.ApiException.UnknownApiError(errorMessage, e, e.code())
         }
 
-        Log.e(TAG, "Falha na chamada API (HTTP ${statusCode}): ${errorMessage}. Erro completo: $errorBody", e)
+        Log.e(
+            TAG,
+            "Falha na chamada API (HTTP ${statusCode}): ${errorMessage}. Erro completo: $errorBody",
+            e
+        )
         Error(appException)
     } catch (e: java.io.IOException) {
         Log.e(TAG, "Falha na chamada API (Network): ${e.localizedMessage}", e)

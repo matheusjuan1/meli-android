@@ -20,6 +20,6 @@ interface MeliApiService {
     @GET("sites/{site_id}/search")
     suspend fun searchProducts(
         @Path("site_id") siteId: String,
-        @Query("q") query: String
+        @Query("query") query: String
     ): SearchResponse
 }
