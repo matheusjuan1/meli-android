@@ -8,4 +8,5 @@
     <string name="type_here">Digite aqui</string>
     <string name="search_hint">Olá, o que você procura para hoje?</string>
     <string name="result_for">Resultado de \"%s\"</string>
+    <string name="sold_by">Vendido por %s</string>
 </resources>
