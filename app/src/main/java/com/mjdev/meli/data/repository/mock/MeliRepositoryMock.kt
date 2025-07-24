@@ -29,11 +29,10 @@ class MeliRepositoryMock(private val context: Context) : IMeliRepository {
     }
 
     override suspend fun searchProducts(siteId: String, query: String): DataResult<List<Product>> {
-        val folderName = query.lowercase().trim()
-        val fileName = "search-${siteId.uppercase()}-${folderName}.json"
+        val fileName = "search-${siteId.uppercase()}-${query.lowercase().trim()}.json"
 
         return try {
-            val jsonString = loadJsonFromAssets(folderName, fileName)
+            val jsonString = loadJsonFromAssets("search", fileName)
             if (jsonString == null) {
                 Log.w(TAG, "Arquivo mock não encontrado para: $fileName. Retornando lista vazia.")
                 DataResult.Success(emptyList())
@@ -73,7 +72,7 @@ class MeliRepositoryMock(private val context: Context) : IMeliRepository {
      */
     private fun loadJsonFromAssets(folder: String, fileName: String): String? {
         return try {
-            val inputStream = context.assets.open("mock/products/$folder/$fileName")
+            val inputStream = context.assets.open("mock/$folder/$fileName")
             val size = inputStream.available()
             val buffer = ByteArray(size)
             inputStream.read(buffer)
