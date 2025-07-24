@@ -1,7 +1,6 @@
 package com.mjdev.meli.data.remote.api
 
 import com.mjdev.meli.data.remote.model.SearchResponse
-import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
