@@ -2,8 +2,10 @@ package com.mjdev.meli.data.repository.mock
 
 import android.content.Context
 import android.util.Log
+import com.mjdev.meli.data.remote.model.ProductDetailsResponse
 import com.mjdev.meli.data.remote.model.SearchResponse
 import com.mjdev.meli.data.remote.util.toDomainProduct
+import com.mjdev.meli.data.remote.util.toDomainProductDetails
 import com.mjdev.meli.domain.exception.MeliException
 import com.mjdev.meli.domain.model.Product
 import com.mjdev.meli.domain.model.ProductDetails
@@ -64,7 +66,33 @@ class MeliRepositoryMock(private val context: Context) : IMeliRepository {
         siteId: String,
         productId: String
     ): DataResult<ProductDetails> {
-        return DataResult.Error(MeliException.UnknownException("Método não implementado"))
+        val fileName = "item-$productId.json"
+
+        return try {
+            val jsonString = loadJsonFromAssets("products", fileName)
+            if (jsonString == null) {
+                Log.e(TAG, "Arquivo mock de detalhes não encontrado para ID: $productId.")
+                DataResult.Error(MeliException.UnknownException("Detalhes do produto não encontrados."))
+            } else {
+                val apiProductDetails =
+                    jsonParser.decodeFromString<ProductDetailsResponse>(jsonString)
+                val productDetails = apiProductDetails.toDomainProductDetails()
+                Log.d(TAG, "Mock de detalhes para '$productId' carregado com sucesso.")
+                DataResult.Success(productDetails)
+            }
+        } catch (e: Exception) {
+            Log.e(
+                TAG,
+                "Erro ao carregar ou parsear JSON mock de detalhes para '$productId': ${e.localizedMessage}",
+                e
+            )
+            DataResult.Error(
+                MeliException.UnknownException(
+                    "Erro ao carregar dados mockados dos detalhes: ${e.localizedMessage}",
+                    e
+                )
+            )
+        }
     }
 
     /**
