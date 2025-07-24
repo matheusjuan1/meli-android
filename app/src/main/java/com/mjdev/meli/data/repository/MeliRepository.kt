@@ -4,6 +4,7 @@ import com.mjdev.meli.data.remote.api.MeliApiService
 import com.mjdev.meli.data.remote.util.toDomainProduct
 import com.mjdev.meli.domain.exception.MeliException
 import com.mjdev.meli.domain.model.Product
+import com.mjdev.meli.domain.model.ProductDetails
 import com.mjdev.meli.domain.repository.IMeliRepository
 import com.mjdev.meli.domain.util.DataResult
 import com.mjdev.meli.domain.util.safeApiCall
@@ -27,7 +28,10 @@ class MeliRepository(private val apiService: MeliApiService) : IMeliRepository {
         }
     }
 
-    override suspend fun getProductDetails(siteId: String, productId: String): DataResult<Product> {
+    override suspend fun getProductDetails(
+        siteId: String,
+        productId: String
+    ): DataResult<ProductDetails> {
         return DataResult.Error(MeliException.UnknownException("Método não implementado"))
     }
 }

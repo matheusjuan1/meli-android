@@ -6,6 +6,7 @@ import com.mjdev.meli.data.remote.model.SearchResponse
 import com.mjdev.meli.data.remote.util.toDomainProduct
 import com.mjdev.meli.domain.exception.MeliException
 import com.mjdev.meli.domain.model.Product
+import com.mjdev.meli.domain.model.ProductDetails
 import com.mjdev.meli.domain.repository.IMeliRepository
 import com.mjdev.meli.domain.util.DataResult
 import kotlinx.serialization.json.Json
@@ -60,7 +61,10 @@ class MeliRepositoryMock(private val context: Context) : IMeliRepository {
         }
     }
 
-    override suspend fun getProductDetails(siteId: String, productId: String): DataResult<Product> {
+    override suspend fun getProductDetails(
+        siteId: String,
+        productId: String
+    ): DataResult<ProductDetails> {
         return DataResult.Error(MeliException.UnknownException("Método não implementado"))
     }
 

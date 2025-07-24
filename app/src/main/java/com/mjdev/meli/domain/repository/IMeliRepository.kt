@@ -1,6 +1,7 @@
 package com.mjdev.meli.domain.repository
 
 import com.mjdev.meli.domain.model.Product
+import com.mjdev.meli.domain.model.ProductDetails
 import com.mjdev.meli.domain.util.DataResult
 
 /**
@@ -25,5 +26,5 @@ interface IMeliRepository {
      * @param productId ID do produto a ser buscado.
      * @return Detalhes do produto.
      */
-    suspend fun getProductDetails(siteId: String, productId: String): DataResult<Product>
+    suspend fun getProductDetails(siteId: String, productId: String): DataResult<ProductDetails>
 }
