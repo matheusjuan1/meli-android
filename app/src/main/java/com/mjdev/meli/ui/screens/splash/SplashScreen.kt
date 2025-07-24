@@ -4,11 +4,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,47 +27,48 @@ import kotlinx.coroutines.delay
  * SplashScreen é a tela inicial do aplicativo, exibida por 3 segundos
  * antes de navegar para a tela de pesquisa.
  *
- * @param paddingValues Valores de preenchimento para a tela, usado para evitar sobreposição com barras de status ou navegação.
  * @param onNavigateToSearch Callback de navegação para a tela de pesquisa.
  */
 @Composable
-fun SplashScreen(paddingValues: PaddingValues, onNavigateToSearch: () -> Unit) {
+fun SplashScreen(onNavigateToSearch: () -> Unit) {
     LaunchedEffect(key1 = Unit) {
         delay(3_000)
         onNavigateToSearch()
     }
 
-    Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxSize()
-            .padding(paddingValues)
-    ) {
-        Image(
+    Scaffold { paddingValues ->
+        Box(
             modifier = Modifier
-                .align(Alignment.Center)
-                .width(130.dp),
-            painter = painterResource(id = R.drawable.img_meli_logo),
-            contentDescription = stringResource(R.string.logo_meli)
-        )
-        Column(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 55.dp)
+                .background(Color.White)
+                .fillMaxSize()
+                .padding(paddingValues)
         ) {
-            Text(
-                text = stringResource(R.string.developed_by),
-                modifier = Modifier.align(Alignment.CenterHorizontally),
-                style = Typography.bodySmall
-            )
             Image(
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .height(52.dp)
-                    .width(52.dp),
-                painter = painterResource(id = R.drawable.img_logo_mj),
-                contentDescription = stringResource(R.string.logo_mj)
+                    .align(Alignment.Center)
+                    .width(130.dp),
+                painter = painterResource(id = R.drawable.img_meli_logo),
+                contentDescription = stringResource(R.string.logo_meli)
             )
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 55.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.developed_by),
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    style = Typography.bodySmall
+                )
+                Image(
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .height(52.dp)
+                        .width(52.dp),
+                    painter = painterResource(id = R.drawable.img_logo_mj),
+                    contentDescription = stringResource(R.string.logo_mj)
+                )
+            }
         }
     }
 }
@@ -75,5 +76,5 @@ fun SplashScreen(paddingValues: PaddingValues, onNavigateToSearch: () -> Unit) {
 @Preview
 @Composable
 private fun SplashScreenPreview() {
-    SplashScreen(paddingValues = PaddingValues(), onNavigateToSearch = {})
+    SplashScreen(onNavigateToSearch = {})
 }

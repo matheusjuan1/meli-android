@@ -53,7 +53,6 @@ fun ProductCard(
             .fillMaxWidth()
             .padding(vertical = 4.dp)
             .clickable { onClick(product.id) },
-        shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(
             containerColor = Gray100
         )
